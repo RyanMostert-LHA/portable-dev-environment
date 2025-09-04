@@ -59,7 +59,7 @@ cd E:\devEnv
 
 ### Development Packages
 - **Node.js**: TypeScript, ESLint, Prettier, Nodemon
-- **Python**: OpenAI, Black, Flake8, MyPy, Pytest, Jupyter
+- **Python**: **OpenAI SDK**, Black, Flake8, MyPy, Pytest, Jupyter, Requests
 
 ### VS Code Extensions
 - Python support with Pylance
@@ -74,7 +74,25 @@ cd E:\devEnv
 - ✅ **Consistent**: Same environment everywhere
 - ✅ **Fast setup**: One command to get started
 - ✅ **Web-based IDE**: Access from any browser
+- ✅ **AI-Ready**: OpenAI SDK pre-installed for AI development
 - ✅ **Portable**: Bring your dev environment anywhere
+
+## 🤖 AI Development Ready
+
+The environment comes with the **OpenAI Python SDK** pre-installed, so you can start building AI applications immediately:
+
+```python
+import openai
+
+# Set your API key
+openai.api_key = "your-api-key-here"
+
+# Start building!
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": "Hello, AI!"}]
+)
+```
 
 ## 📁 Repository Structure
 ```
