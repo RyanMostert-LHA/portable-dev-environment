@@ -1,12 +1,13 @@
 # Portable Development Environment 🚀
 
-This repository contains everything you need to replicate a complete coding setup on any machine - choose from **Windows installer**, **Docker container**, or **Virtual Machine** deployment options.
+This repository contains everything you need to replicate a complete coding setup on any machine - choose from **Docker**, **WSL**, **Windows installer**, or **Virtual Machine** deployment options.
 
 ## 🎯 Choose Your Setup Method
 
 | Method | Best For | Time to Setup |
 |--------|----------|---------------|
 | **🐳 Docker** | Cross-platform, quick start | 5 minutes |
+| **🐧 WSL** | Windows users, native Linux performance | 10 minutes |
 | **💻 Windows Native** | Windows users, full integration | 15 minutes |
 | **🖥️ Virtual Machine** | Isolated environment, Docker support | 30 minutes |
 
@@ -32,6 +33,60 @@ cd portable-dev-environment
 docker-compose up -d
 ```
 Access VS Code at: **http://localhost:8080**
+
+## 🐧 WSL Setup (Recommended for Windows)
+
+Perfect balance of Linux performance with Windows integration.
+
+### Prerequisites
+- Windows 10 version 2004+ or Windows 11
+- Administrator privileges
+
+### Quick Start
+```powershell
+# 1. Install WSL2 + Ubuntu (run as Administrator)
+wsl --install
+
+# 2. Restart computer when prompted
+
+# 3. Create Ubuntu user account (WSL will open automatically)
+# Follow the prompts to set username/password
+```
+
+### Post-Installation Setup
+```bash
+# Inside WSL Ubuntu terminal
+curl -L https://raw.githubusercontent.com/RyanMostert/portable-dev-environment/main/VM-Setup/scripts/post-install-ubuntu.sh -o ~/post-install.sh
+chmod +x ~/post-install.sh
+./post-install.sh
+```
+
+### What You Get
+- **Ubuntu 22.04 LTS** running natively on Windows
+- **Docker** + Docker Compose with native performance  
+- **VS Code** with Remote-WSL integration
+- **OpenCode AI** coding assistant
+- **Node.js, Python** development environments
+- **Full Windows file system access** via `/mnt/c/`
+
+### Daily Usage
+```powershell
+# Open WSL from anywhere
+wsl
+
+# Access WSL files from Windows Explorer
+\\wsl$\Ubuntu\home\yourusername
+
+# Use VS Code with WSL
+code .  # (inside WSL directory)
+```
+
+### Advantages
+- ✅ **Native Linux performance** 
+- ✅ **Windows integration** - access Windows files seamlessly
+- ✅ **VS Code Remote-WSL** works perfectly
+- ✅ **Docker runs natively** without VM overhead
+- ✅ **Lightweight** - no separate VM required
 
 ## 💻 Windows Native Setup
 
@@ -298,7 +353,25 @@ docker-compose up -d
 # Navigate to: http://localhost:8080
 ```
 
-### For Windows Users
+### For Windows Users (WSL Recommended)
+```powershell
+# 1. Install WSL2 + Ubuntu (run as Administrator)
+wsl --install
+
+# 2. Restart computer, then inside WSL:
+curl -L https://raw.githubusercontent.com/RyanMostert/portable-dev-environment/main/VM-Setup/scripts/post-install-ubuntu.sh -o ~/post-install.sh
+chmod +x ~/post-install.sh
+./post-install.sh
+
+# 3. Configure Git
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# 4. Start coding with VS Code + WSL!
+code .
+```
+
+### For Windows Native Installation
 ```powershell
 # 1. Clone to E: drive (recommended)
 git clone https://github.com/RyanMostert/portable-dev-environment.git E:\devEnv
