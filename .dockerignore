@@ -1,0 +1,20 @@
+# Exclude large directories that shouldn't be in Docker image
+Microsoft VS Code/
+Microsoft VS Code Insiders/
+Projects/
+
+# Git
+.git/
+.gitignore
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
+
+# IDE files
+.vscode/
+.idea/

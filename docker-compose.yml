@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  dev-environment:
+    build: .
+    image: ryanmostert/portable-dev-environment:latest
+    container_name: dev-env
+    ports:
+      - "8080:8080"  # VS Code Server
+      - "3000:3000"  # Common development port
+      - "5000:5000"  # Flask/Python development
+      - "8000:8000"  # Alternative development port
+    volumes:
+      # Mount your projects directory
+      - ./projects:/home/developer/workspace/projects
+      # Persist VS Code settings and extensions
+      - vscode-data:/home/developer/.local/share/code-server
+      # Persist Git configuration
+      - git-config:/home/developer/.gitconfig
+    environment:
+      - WORKSPACE=/home/developer/workspace
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+volumes:
+  vscode-data:
+  git-config:
