@@ -57,6 +57,9 @@ RUN pip install \
 # Install VS Code Server (code-server) for web-based development
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
+# Install OpenCode AI coding agent
+RUN curl -fsSL https://opencode.ai/install | bash
+
 # Create a non-root user
 RUN useradd -m -s /bin/bash developer \
     && echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

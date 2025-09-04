@@ -74,25 +74,29 @@ cd E:\devEnv
 - ✅ **Consistent**: Same environment everywhere
 - ✅ **Fast setup**: One command to get started
 - ✅ **Web-based IDE**: Access from any browser
-- ✅ **AI-Ready**: OpenAI SDK pre-installed for AI development
+- ✅ **AI-Ready**: OpenCode AI coding agent pre-installed
 - ✅ **Portable**: Bring your dev environment anywhere
 
-## 🤖 AI Development Ready
+## 🤖 AI Coding Assistant Ready
 
-The environment comes with the **OpenAI Python SDK** pre-installed, so you can start building AI applications immediately:
+The environment comes with **OpenCode** - an AI coding agent built for the terminal that's 100% open source and provider-agnostic:
 
-```python
-import openai
+- Works with **Anthropic Claude**, **OpenAI**, **Google**, and **local models**
+- Terminal-focused interface
+- Flexible and customizable
 
-# Set your API key
-openai.api_key = "your-api-key-here"
+```bash
+# Start using OpenCode in your terminal
+opencode
 
-# Start building!
-response = openai.ChatCompletion.create(
-    model="gpt-4",
-    messages=[{"role": "user", "content": "Hello, AI!"}]
-)
+# Or use it with specific files
+opencode src/main.py
+
+# Configure your preferred AI provider
+opencode config
 ```
+
+Perfect for AI-assisted development right from the command line!
 
 ## 📁 Repository Structure
 ```
