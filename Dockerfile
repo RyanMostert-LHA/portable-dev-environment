@@ -30,9 +30,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
 # Install Python 3.11
 RUN add-apt-repository ppa:deadsnakes/ppa -y \
     && apt-get update \
-    && apt-get install -y python3.11 python3.11-pip python3.11-venv \
-    && ln -s /usr/bin/python3.11 /usr/bin/python \
-    && ln -s /usr/bin/pip3 /usr/bin/pip
+    && apt-get install -y python3.11 python3.11-venv python3.11-dev \
+    && ln -s /usr/bin/python3.11 /usr/bin/python
+
+# Install pip for Python 3.11 manually (python3.11-pip not available)
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
 
 # Install global Node.js packages
 RUN npm install -g \
@@ -43,8 +45,8 @@ RUN npm install -g \
     prettier \
     @types/node
 
-# Install Python packages
-RUN pip install \
+# Install Python packages (run as root before switching to developer user)
+RUN python3.11 -m pip install \
     openai \
     black \
     flake8 \
