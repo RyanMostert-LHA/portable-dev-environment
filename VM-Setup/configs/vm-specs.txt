@@ -1,0 +1,40 @@
+# VM Configuration Specifications
+# Recommended settings for Docker development VM
+
+VM_NAME=DevEnv-Docker
+MEMORY_GB=4
+DISK_SIZE_GB=50
+PROCESSOR_CORES=2
+GENERATION=2
+
+# Network Configuration
+SWITCH_NAME=DevEnv-Switch
+SWITCH_TYPE=Internal
+NAT_NETWORK=192.168.100.0/24
+NAT_GATEWAY=192.168.100.1
+
+# OS Requirements
+OS=Ubuntu 22.04 LTS Desktop
+ISO_URL=https://ubuntu.com/download/desktop
+ARCHITECTURE=amd64
+
+# Features Required
+NESTED_VIRTUALIZATION=Enabled
+SECURE_BOOT=MicrosoftUEFICertificateAuthority
+DYNAMIC_MEMORY=Enabled
+MIN_MEMORY_GB=2
+MAX_MEMORY_GB=4
+
+# Software to Install
+DOCKER_CE=Latest
+DOCKER_COMPOSE=Latest
+NODE_JS=LTS
+PYTHON=3.11
+VS_CODE=Latest
+OPENCODE_AI=Latest
+
+# Development Tools
+GIT=Latest
+BUILD_ESSENTIAL=Yes
+CURL_WGET=Yes
+VIM_NANO=Yes
