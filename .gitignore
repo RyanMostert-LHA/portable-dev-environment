@@ -1,0 +1,18 @@
+# Exclude VS Code installations (too large for Git)
+Microsoft VS Code/
+Microsoft VS Code Insiders/
+
+# Exclude Projects directory (contains your specific projects)
+Projects/
+
+# Exclude any temp files
+*.tmp
+*.log
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
