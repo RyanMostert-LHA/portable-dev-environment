@@ -61,7 +61,16 @@ sudo apt install -y nodejs
 echo "🐍 Installing Python 3.11..."
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update
-sudo apt install -y python3.11 python3.11-pip python3.11-venv
+sudo apt install -y python3.11 python3.11-venv python3.11-dev
+
+# Install pip for Python 3.11 manually (python3.11-pip not available)
+echo "🐍 Installing pip for Python 3.11..."
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+
+# Add ~/.local/bin to PATH for pip
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+
+# Set python3.11 as alternative
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
 # Install global Node.js packages
@@ -74,9 +83,9 @@ sudo npm install -g \
     prettier \
     @types/node
 
-# Install Python packages
+# Install Python packages (using python3.11 explicitly)
 echo "🐍 Installing Python packages..."
-python3 -m pip install --user \
+python3.11 -m pip install --user \
     openai \
     black \
     flake8 \
@@ -88,11 +97,8 @@ python3 -m pip install --user \
 
 # Install VS Code
 echo "💻 Installing VS Code..."
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update
-sudo apt install -y code
+# Use snap instead of apt repository (easier and more reliable)
+sudo snap install code --classic
 
 # Install VS Code extensions
 echo "🔌 Installing VS Code extensions..."
@@ -106,6 +112,10 @@ code --install-extension ms-vscode-remote.remote-containers
 # Install OpenCode AI
 echo "🤖 Installing OpenCode AI..."
 curl -fsSL https://opencode.ai/install | bash
+
+# Ensure OpenCode is in PATH (reload bashrc)
+echo "🔄 Reloading shell configuration..."
+source ~/.bashrc
 
 # Configure Git
 echo "📝 Configuring Git..."
