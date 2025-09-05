@@ -4,22 +4,25 @@ This repository contains everything you need to replicate a complete coding setu
 
 ## 🎯 Choose Your Setup Method
 
-| Method | Best For | Time to Setup |
-|--------|----------|---------------|
-| **🐳 Docker** | Cross-platform, quick start | 5 minutes |
-| **🐧 WSL** | Windows users, native Linux performance | 10 minutes |
-| **💻 Windows Native** | Windows users, full integration | 15 minutes |
-| **🖥️ Virtual Machine** | Isolated environment, Docker support | 30 minutes |
+| Method                 | Best For                                | Time to Setup |
+| ---------------------- | --------------------------------------- | ------------- |
+| **🐳 Docker**          | Cross-platform, quick start             | 5 minutes     |
+| **🐧 WSL**             | Windows users, native Linux performance | 10 minutes    |
+| **💻 Windows Native**  | Windows users, full integration         | 15 minutes    |
+| **🖥️ Virtual Machine** | Isolated environment, Docker support    | 30 minutes    |
 
 ## 🐳 Docker Setup (Recommended - Works on Any OS!)
 
 ### Quick Start
+
 ```bash
 docker run -d -p 8080:8080 --name dev-env ryanmostert/portable-dev-environment:latest
 ```
+
 Then open **http://localhost:8080** for VS Code in your browser!
 
 ### With Your Projects
+
 ```bash
 docker run -d -p 8080:8080 \
   -v /path/to/your/projects:/home/developer/workspace/projects \
@@ -27,11 +30,13 @@ docker run -d -p 8080:8080 \
 ```
 
 ### Using Docker Compose (Best for Development)
+
 ```bash
 git clone https://github.com/RyanMostert/portable-dev-environment.git
 cd portable-dev-environment
 docker-compose up -d
 ```
+
 Access VS Code at: **http://localhost:8080**
 
 ## 🐧 WSL Setup (Recommended for Windows)
@@ -39,10 +44,12 @@ Access VS Code at: **http://localhost:8080**
 Perfect balance of Linux performance with Windows integration.
 
 ### Prerequisites
+
 - Windows 10 version 2004+ or Windows 11
 - Administrator privileges
 
 ### Quick Start
+
 ```powershell
 # 1. Install WSL2 + Ubuntu (run as Administrator)
 wsl --install
@@ -54,6 +61,7 @@ wsl --install
 ```
 
 ### Post-Installation Setup
+
 ```bash
 # Inside WSL Ubuntu terminal
 curl -L https://raw.githubusercontent.com/RyanMostert/portable-dev-environment/main/VM-Setup/scripts/post-install-ubuntu.sh -o ~/post-install.sh
@@ -62,14 +70,16 @@ chmod +x ~/post-install.sh
 ```
 
 ### What You Get
+
 - **Ubuntu 22.04 LTS** running natively on Windows
-- **Docker** + Docker Compose with native performance  
+- **Docker** + Docker Compose with native performance
 - **VS Code** with Remote-WSL integration
 - **OpenCode AI** coding assistant
 - **Node.js, Python** development environments
 - **Full Windows file system access** via `/mnt/c/`
 
 ### Daily Usage
+
 ```powershell
 # Open WSL from anywhere
 wsl
@@ -82,7 +92,8 @@ code .  # (inside WSL directory)
 ```
 
 ### Advantages
-- ✅ **Native Linux performance** 
+
+- ✅ **Native Linux performance**
 - ✅ **Windows integration** - access Windows files seamlessly
 - ✅ **VS Code Remote-WSL** works perfectly
 - ✅ **Docker runs natively** without VM overhead
@@ -91,6 +102,7 @@ code .  # (inside WSL directory)
 ## 💻 Windows Native Setup
 
 ### Option 1: Clone & Install
+
 ```bash
 git clone https://github.com/RyanMostert/portable-dev-environment.git E:\devEnv
 cd E:\devEnv
@@ -99,7 +111,8 @@ cd E:\devEnv
 ```
 
 ### Option 2: Manual Setup
-1. **Copy this entire `devEnv` folder** to your E: drive  
+
+1. **Copy this entire `devEnv` folder** to your E: drive
 2. **Run as Administrator**: Right-click PowerShell → "Run as Administrator"
 3. **Execute the installer**: `.\install-dev-environment.ps1`
 4. **Configure Git**:
@@ -109,24 +122,28 @@ cd E:\devEnv
    ```
 
 ### Daily Usage
+
 - **Quick access**: Run `setup-dev-env.bat`
 - **Open VS Code**: `code E:\devEnv`
 
 ## 🛠 What's Included
 
 ### Core Tools
+
 - **Git** (version control)
-- **Node.js** (JavaScript runtime)  
+- **Node.js** (JavaScript runtime)
 - **Python 3.11** (programming language)
 - **VS Code Server** (web-based IDE)
 
 ### Development Packages
+
 - **Node.js**: TypeScript, ESLint, Prettier, Nodemon
 - **Python**: **OpenAI SDK**, Black, Flake8, MyPy, Pytest, Jupyter, Requests
 
 ### VS Code Extensions
+
 - Python support with Pylance
-- TypeScript support  
+- TypeScript support
 - Prettier (code formatting)
 - ESLint (code linting)
 - Tailwind CSS support
@@ -165,17 +182,17 @@ Perfect for AI-assisted development right from the command line!
 
 This environment is pre-configured with several Model-centric Communication Protocol (MCP) servers to supercharge your AI-assisted development workflow. These servers allow the OpenCode AI agent to perform a wide range of tasks automatically:
 
-| MCP Server | Purpose |
-| :--- | :--- |
-| **`filesystem`** | Provides access to the local filesystem for reading, writing, and modifying files. |
-| **`git`** | Enables interaction with Git repositories for committing, pushing, and managing branches. |
-| **`fetch`** | Allows the agent to access and retrieve information from the web. |
-| **`context7`** | Provides up-to-date documentation for various libraries and frameworks. |
-| **`github`** | Interacts with the GitHub CLI to manage repositories, issues, and pull requests. |
-| **`testing`** | Automatically runs your project's test suite to ensure code quality. |
-| **`linter`** | Formats code and checks for linting errors to maintain a consistent style. |
-| **`docker`** | Manages your Docker environment, including building images and running containers. |
-| **`database`** | Interacts with your project's database for querying data and managing schemas. |
+| MCP Server       | Purpose                                                                                   |
+| :--------------- | :---------------------------------------------------------------------------------------- |
+| **`filesystem`** | Provides access to the local filesystem for reading, writing, and modifying files.        |
+| **`git`**        | Enables interaction with Git repositories for committing, pushing, and managing branches. |
+| **`fetch`**      | Allows the agent to access and retrieve information from the web.                         |
+| **`context7`**   | Provides up-to-date documentation for various libraries and frameworks.                   |
+| **`github`**     | Interacts with the GitHub CLI to manage repositories, issues, and pull requests.          |
+| **`testing`**    | Automatically runs your project's test suite to ensure code quality.                      |
+| **`linter`**     | Formats code and checks for linting errors to maintain a consistent style.                |
+| **`docker`**     | Manages your Docker environment, including building images and running containers.        |
+| **`database`**   | Interacts with your project's database for querying data and managing schemas.            |
 
 ### How to Use This Configuration
 
@@ -183,9 +200,9 @@ You don't need to do anything special to activate these tools! The `opencode.jso
 
 **To customize the agent's tools, simply edit the `opencode.json` file:**
 
-*   **Disable a server:** Find the server you don't need (e.g., `database`) and change its `"enabled": true` setting to `"enabled": false`.
-*   **Enable a server:** Change `"enabled": false` back to `true`.
-*   **Add new servers:** You can add more MCP server configurations to the `mcp` block in the file.
+- **Disable a server:** Find the server you don't need (e.g., `database`) and change its `"enabled": true` setting to `"enabled": false`.
+- **Enable a server:** Change `"enabled": false` back to `true`.
+- **Add new servers:** You can add more MCP server configurations to the `mcp` block in the file.
 
 This setup ensures your AI assistant is ready for advanced development tasks right out of the box, and you have full control over its capabilities.
 
@@ -194,12 +211,14 @@ This setup ensures your AI assistant is ready for advanced development tasks rig
 Perfect for running Docker in a dedicated VM with full Ubuntu desktop environment.
 
 ### Quick Start
+
 1. **Download Ubuntu 22.04 LTS ISO**: Place at `VM-Setup/ISOs/ubuntu-22.04-desktop-amd64.iso`
 2. **Run as Administrator**: `VM-Setup/scripts/quick-setup.bat`
 3. **Install Ubuntu**: Follow the VM installation wizard
 4. **Post-install setup**: Run the provided script inside Ubuntu VM
 
 ### What You Get
+
 - **Ubuntu 22.04 LTS** desktop environment
 - **4GB RAM**, 50GB storage with dynamic allocation
 - **Docker** + Docker Compose pre-configured
@@ -208,6 +227,7 @@ Perfect for running Docker in a dedicated VM with full Ubuntu desktop environmen
 - **Network access** via NAT configuration
 
 ### Requirements
+
 - Windows 10/11 Pro, Enterprise, or Education
 - Hyper-V support enabled
 - At least 8GB RAM on host
@@ -216,6 +236,7 @@ Perfect for running Docker in a dedicated VM with full Ubuntu desktop environmen
 **📖 Complete VM Guide**: See `VM-Setup/README.md`
 
 ## 📁 Repository Structure
+
 ```
 portable-dev-environment/
 ├── Dockerfile                      # Docker image definition
@@ -247,6 +268,7 @@ Docker lets you run applications in isolated containers. Think of it like lightw
 ### **Essential Docker Commands**
 
 #### **Working with Images**
+
 ```bash
 # Download an image
 docker pull ubuntu
@@ -262,6 +284,7 @@ docker rmi image-name
 ```
 
 #### **Working with Containers**
+
 ```bash
 # Run a container (creates and starts)
 docker run hello-world
@@ -291,6 +314,7 @@ docker run -v /host/path:/container/path nginx
 ### **Using This Development Environment**
 
 #### **Option A: Docker Compose (Recommended)**
+
 ```bash
 # Clone this repo
 git clone https://github.com/RyanMostert/portable-dev-environment.git
@@ -310,6 +334,7 @@ docker-compose up -d --build
 ```
 
 #### **Option B: Manual Docker Commands**
+
 ```bash
 # Build the image
 docker build -t my-dev-env .
@@ -327,6 +352,7 @@ docker stop dev-container && docker rm dev-container
 ```
 
 ### **Common Docker Flags**
+
 ```bash
 -d          # Run in background (detached)
 -p 8080:80  # Map ports (host:container)
@@ -338,6 +364,7 @@ docker stop dev-container && docker rm dev-container
 ```
 
 ### **Troubleshooting**
+
 ```bash
 # Check if Docker is running
 docker --version
@@ -359,6 +386,7 @@ docker exec -it container-name bash
 ```
 
 ### **Quick Start Steps**
+
 1. **Test Docker**: `docker run hello-world`
 2. **Clone repo**: `git clone https://github.com/RyanMostert/portable-dev-environment.git`
 3. **Start environment**: `docker-compose up -d`
@@ -368,6 +396,7 @@ docker exec -it container-name bash
 ## 🚀 Getting Started Guide
 
 ### For Beginners (Docker Recommended)
+
 ```bash
 # 1. Install Docker Desktop from docker.com
 # 2. Clone this repository
@@ -382,6 +411,7 @@ docker-compose up -d
 ```
 
 ### For Windows Users (WSL Recommended)
+
 ```powershell
 # 1. Install WSL2 + Ubuntu (run as Administrator)
 wsl --install
@@ -400,6 +430,7 @@ code .
 ```
 
 ### For Windows Native Installation
+
 ```powershell
 # 1. Clone to E: drive (recommended)
 git clone https://github.com/RyanMostert/portable-dev-environment.git E:\devEnv
@@ -417,6 +448,7 @@ code .
 ```
 
 ### For Advanced Users (VM Setup)
+
 ```batch
 # 1. Download Ubuntu 22.04 LTS ISO
 # 2. Place at: VM-Setup\ISOs\ubuntu-22.04-desktop-amd64.iso
@@ -430,6 +462,7 @@ VM-Setup\scripts\quick-setup.bat
 ## 🎉 What's Next?
 
 After setup, you'll have:
+
 - ✅ **VS Code** ready for development
 - ✅ **OpenCode AI** for AI-assisted coding
 - ✅ **Docker** for containerized development
