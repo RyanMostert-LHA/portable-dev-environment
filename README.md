@@ -161,6 +161,34 @@ opencode config
 
 Perfect for AI-assisted development right from the command line!
 
+## Enhanced AI Capabilities with MCP Servers
+
+This environment is pre-configured with several Model-centric Communication Protocol (MCP) servers to supercharge your AI-assisted development workflow. These servers allow the OpenCode AI agent to perform a wide range of tasks automatically:
+
+| MCP Server | Purpose |
+| :--- | :--- |
+| **`filesystem`** | Provides access to the local filesystem for reading, writing, and modifying files. |
+| **`git`** | Enables interaction with Git repositories for committing, pushing, and managing branches. |
+| **`fetch`** | Allows the agent to access and retrieve information from the web. |
+| **`context7`** | Provides up-to-date documentation for various libraries and frameworks. |
+| **`github`** | Interacts with the GitHub CLI to manage repositories, issues, and pull requests. |
+| **`testing`** | Automatically runs your project's test suite to ensure code quality. |
+| **`linter`** | Formats code and checks for linting errors to maintain a consistent style. |
+| **`docker`** | Manages your Docker environment, including building images and running containers. |
+| **`database`** | Interacts with your project's database for querying data and managing schemas. |
+
+### How to Use This Configuration
+
+You don't need to do anything special to activate these tools! The `opencode.json` file is automatically detected by the OpenCode AI agent when you run it from the `portable-dev-environment` directory.
+
+**To customize the agent's tools, simply edit the `opencode.json` file:**
+
+*   **Disable a server:** Find the server you don't need (e.g., `database`) and change its `"enabled": true` setting to `"enabled": false`.
+*   **Enable a server:** Change `"enabled": false` back to `true`.
+*   **Add new servers:** You can add more MCP server configurations to the `mcp` block in the file.
+
+This setup ensures your AI assistant is ready for advanced development tasks right out of the box, and you have full control over its capabilities.
+
 ## 🖥️ Virtual Machine Setup (Complete Isolation)
 
 Perfect for running Docker in a dedicated VM with full Ubuntu desktop environment.
