@@ -1,0 +1,9 @@
+# Python dependencies
+openai
+black
+flake8
+mypy
+pytest
+jupyter
+requests
+python-dotenv

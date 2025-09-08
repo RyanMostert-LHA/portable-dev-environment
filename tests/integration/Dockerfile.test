@@ -1,0 +1,6 @@
+FROM ryanmostert/portable-dev-environment:latest
+
+# This test Dockerfile is used to verify the base image.
+# We can add tests here to run inside the container.
+
+RUN echo "Hello from the test container!"

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "autoupdate": true,
+  "mcp": {
+    "filesystem": {
+      "type": "local",
+      "command": ["npx", "@modelcontextprotocol/server-filesystem", "${FILESYSTEM_ROOT_DIR:-${PWD}}"],
+      "enabled": true,
+      "description": "Provides access to the local filesystem for reading, writing, and modifying files"
+    },
+    "git": {
+      "type": "local", 
+      "command": ["${PYTHON_VENV_PATH:-${HOME}/mcp_venv}/bin/python", "-m", "mcp_server_git", "--repository", "${GIT_REPOSITORY_DIR:-${PWD}}"],
+      "enabled": true,
+      "description": "Enables interaction with Git repositories for committing, pushing, and managing branches"
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["${PYTHON_VENV_PATH:-${HOME}/mcp_venv}/bin/python", "-m", "mcp_server_fetch"],
+      "enabled": true,
+      "description": "Allows the agent to access and retrieve information from the web"
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "context7-mcp-server"],
+      "enabled": true,
+      "description": "Provides up-to-date documentation for various libraries and frameworks"
+    },
+    "any-chat-completions": {
+      "type": "local",
+      "command": ["npx", "${MCP_SERVERS_DIR:-${HOME}/mcp_servers}/node_modules/.bin/any-chat-completions-mcp"],
+      "enabled": true,
+      "description": "Provides access to various AI chat completion models",
+      "env": {
+        "AI_CHAT_BASE_URL": "${HUGGINGFACE_BASE_URL:-https://api-inference.huggingface.co/v1/}",
+        "AI_CHAT_KEY": "${HUGGINGFACE_API_KEY}",
+        "AI_CHAT_MODEL": "${HUGGINGFACE_MODEL:-NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO}",
+        "AI_CHAT_API_KEY": "${HUGGINGFACE_API_KEY}"
+      }
+    },
+    "huggingface-local": {
+      "type": "local",
+      "command": ["${PYTHON_VENV_PATH:-${HOME}/mcp_venv}/bin/python", "-m", "${MCP_SERVERS_DIR:-${HOME}/mcp_servers}/mcp_server_huggingface"],
+      "enabled": false,
+      "description": "Local Hugging Face model inference (enable after PyTorch installation completes)"
+    },
+    "browser": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/browser"],
+      "enabled": true,
+      "description": "Provides web browsing capabilities for research and data gathering"
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/gh"],
+      "enabled": true,
+      "description": "Interacts with the GitHub CLI to manage repositories, issues, and pull requests"
+    },
+    "testing": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/testing"],
+      "enabled": true,
+      "description": "Automatically runs your project's test suite to ensure code quality"
+    },
+    "linter": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/linter"],
+      "enabled": true,
+      "description": "Formats code and checks for linting errors to maintain a consistent style"
+    },
+    "docker": {
+      "type": "local",
+      "command": ["npx", "-y", "@quantgeekdev/docker-mcp"],
+      "enabled": true,
+      "description": "Manages your Docker environment, including building images and running containers"
+    },
+    "database": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/db"],
+      "enabled": true,
+      "description": "Interacts with your project's database for querying data and managing schemas"
+    },
+    "postgres": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/postgres"],
+      "enabled": false,
+      "description": "PostgreSQL database operations and management",
+      "env": {
+        "POSTGRES_HOST": "${POSTGRES_HOST:-localhost}",
+        "POSTGRES_PORT": "${POSTGRES_PORT:-5432}",
+        "POSTGRES_DB": "${POSTGRES_DB:-dev_database}",
+        "POSTGRES_USER": "${POSTGRES_USER:-dev_user}",
+        "POSTGRES_PASSWORD": "${POSTGRES_PASSWORD}"
+      }
+    },
+    "redis": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/redis"],
+      "enabled": false,
+      "description": "Redis cache management and operations",
+      "env": {
+        "REDIS_HOST": "${REDIS_HOST:-localhost}",
+        "REDIS_PORT": "${REDIS_PORT:-6379}",
+        "REDIS_PASSWORD": "${REDIS_PASSWORD}"
+      }
+    },
+    "kubernetes": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/kubernetes"],
+      "enabled": false,
+      "description": "Kubernetes container orchestration and management"
+    },
+    "terraform": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/terraform"],
+      "enabled": false,
+      "description": "Infrastructure as code management with Terraform"
+    },
+    "ssh": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/ssh"],
+      "enabled": false,
+      "description": "SSH remote server management and operations"
+    }
+  }
+}

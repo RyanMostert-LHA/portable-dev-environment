@@ -20,8 +20,14 @@ RUN apt-get update && apt-get install -y \
     sudo \
     vim \
     nano \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+     unzip \
+     && rm -rf /var/lib/apt/lists/*
+
+# Install Alacritty
+RUN add-apt-repository ppa:aslatter/ppa -y \
+    && apt-get update \
+    && apt-get install -y alacritty
+
 
 # Install Node.js (latest LTS)
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \

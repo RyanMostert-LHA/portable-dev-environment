@@ -1,0 +1,18 @@
+{
+  "name": "portable-dev-environment",
+  "version": "1.0.0",
+  "description": "A portable development environment with VS Code, Docker, and AI tools.",
+  "dependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "nodemon": "^2.0.22",
+    "eslint": "^8.40.0",
+    "prettier": "^2.8.8",
+    "@types/node": "^20.0.0",
+    "@mcp/postgres": "^1.0.0",
+    "@mcp/redis": "^1.0.0",
+    "@mcp/kubernetes": "^1.0.0",
+    "@mcp/terraform": "^1.0.0",
+    "@mcp/ssh": "^1.0.0"
+  }
+}

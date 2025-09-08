@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      id: docker_build
+      run: |
+        export IMAGE_TAG=$(date +%s)
+        docker build . --file Dockerfile --tag my-image-name:$IMAGE_TAG
+        echo "::set-output name=image_tag::$IMAGE_TAG"
+
+    - name: Scan image for vulnerabilities
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'my-image-name:${{ steps.docker_build.outputs.image_tag }}'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+
+    - name: Run tests
+      run: |
+        echo "No tests configured yet. Add your test commands here."
+        # Example: docker run my-image-name:${{ steps.docker_build.outputs.image_tag }} pytest
+
+

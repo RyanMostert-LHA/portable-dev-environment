@@ -2,14 +2,36 @@
 
 This repository contains everything you need to replicate a complete coding setup on any machine - choose from **Docker**, **WSL**, **Windows installer**, or **Virtual Machine** deployment options.
 
-## 🎯 Choose Your Setup Method
+## 🚀 Installation
 
-| Method                 | Best For                                | Time to Setup |
-| ---------------------- | --------------------------------------- | ------------- |
-| **🐳 Docker**          | Cross-platform, quick start             | 5 minutes     |
-| **🐧 WSL**             | Windows users, native Linux performance | 10 minutes    |
-| **💻 Windows Native**  | Windows users, full integration         | 15 minutes    |
-| **🖥️ Virtual Machine** | Isolated environment, Docker support    | 30 minutes    |
+This repository now uses a unified installation script. To set up the environment, follow these steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/RyanMostert/portable-dev-environment.git
+    cd portable-dev-environment
+    ```
+
+2.  **Run the installer:**
+    ```bash
+    bash scripts/install/install.sh
+    ```
+
+The script will detect your operating system and guide you through the installation process.
+
+## ⚙️ Configuration
+
+Before you start, you need to configure your environment.
+
+1.  **Create a `.env` file** by copying the example file:
+    ```bash
+    cp .env.example .env
+    ```
+2.  **Edit the `.env` file** and fill in the required values for `AI_CHAT_API_KEY`, `DEV_REPO_PATH`, etc.
+
+This file is ignored by Git, so your secrets are safe.
+
+
 
 ## 🐳 Docker Setup (Recommended - Works on Any OS!)
 
@@ -158,27 +180,56 @@ cd E:\devEnv
 - ✅ **Portable**: Bring your dev environment anywhere
 
 ## 🤖 AI Coding Assistant Ready
+ 
+ This environment comes with **OpenCode** - an AI coding agent built for the terminal that's 100% open source and provider-agnostic:
+ 
+ - Works with **Anthropic Claude**, **OpenAI**, **Google**, and **local models**
+ - Terminal-focused interface
+ - Flexible and customizable
+ 
+ ```bash
+ # Start using OpenCode in your terminal
+ opencode
+ 
+ # Or use it with specific files
+ opencode src/main.py
+ 
+ # Configure your preferred AI provider
+ opencode config
+ ```
+ 
+ Perfect for AI-assisted development right from the command line!
 
-The environment comes with **OpenCode** - an AI coding agent built for the terminal that's 100% open source and provider-agnostic:
+## 🔄 Continuous Integration & Deployment
 
-- Works with **Anthropic Claude**, **OpenAI**, **Google**, and **local models**
-- Terminal-focused interface
-- Flexible and customizable
+This repository is equipped with GitHub Actions for automated CI/CD:
+
+*   **Continuous Integration (CI)**: On every push or pull request to `main`, a workflow builds the Docker image, scans it for vulnerabilities, and runs tests.
+*   **Continuous Deployment (CD)**: When changes are merged to `main`, the Docker image is automatically published to the GitHub Container Registry.
+
+This ensures that the `latest` tag of the Docker image is always up-to-date with the latest secure and tested version of the environment.
+
+## 🧪 Automated Testing
+
+This repository includes a testing framework to ensure the reliability and correctness of the environment. The tests are located in the `tests/` directory and are divided into two types:
+
+*   **Unit Tests**: These tests verify the functionality of individual scripts. They use the `shunit2` framework and can be found in `tests/unit/`.
+*   **Integration Tests**: These tests verify that the entire environment works as expected. They build a test Docker image and run checks inside it. These are located in `tests/integration/`.
+
+**To run the tests:**
 
 ```bash
-# Start using OpenCode in your terminal
-opencode
+# Run all unit tests
+for test in tests/unit/*_test.sh; do bash "$test"; done
 
-# Or use it with specific files
-opencode src/main.py
-
-# Configure your preferred AI provider
-opencode config
+# Run integration tests
+docker build -f tests/integration/Dockerfile.test .
 ```
 
-Perfect for AI-assisted development right from the command line!
+The tests are also run automatically as part of the CI/CD pipeline.
+ 
+ ## Enhanced AI Capabilities with MCP Servers
 
-## Enhanced AI Capabilities with MCP Servers
 
 This environment is pre-configured with several Model-centric Communication Protocol (MCP) servers to supercharge your AI-assisted development workflow. These servers allow the OpenCode AI agent to perform a wide range of tasks automatically:
 
@@ -194,17 +245,25 @@ This environment is pre-configured with several Model-centric Communication Prot
 | **`docker`**     | Manages your Docker environment, including building images and running containers.        |
 | **`database`**   | Interacts with your project's database for querying data and managing schemas.            |
 
-### How to Use This Configuration
+### Development and Production Profiles
 
-You don't need to do anything special to activate these tools! The `opencode.json` file is automatically detected by the OpenCode AI agent when you run it from the `portable-dev-environment` directory.
+This environment comes with two pre-configured profiles for the OpenCode AI agent:
 
-**To customize the agent's tools, simply edit the `opencode.json` file:**
+*   `opencode.development.json`: Enables **all** MCP servers, including experimental ones. Ideal for testing new features and working on the environment itself.
+*   `opencode.production.json`: Enables only the core, stable MCP servers. Optimized for performance and reliability in your daily coding tasks.
 
-- **Disable a server:** Find the server you don't need (e.g., `database`) and change its `"enabled": true` setting to `"enabled": false`.
-- **Enable a server:** Change `"enabled": false` back to `true`.
-- **Add new servers:** You can add more MCP server configurations to the `mcp` block in the file.
+**To switch between profiles, simply copy the one you want to use to `opencode.json`:**
 
-This setup ensures your AI assistant is ready for advanced development tasks right out of the box, and you have full control over its capabilities.
+```bash
+# To use the production profile (recommended for daily use)
+cp opencode.production.json opencode.json
+
+# To use the development profile
+cp opencode.development.json opencode.json
+```
+
+The `opencode.json` file is what the OpenCode agent will load. This file is in `.gitignore`, so your choice of profile won't be committed.
+
 
 ## 🖥️ Virtual Machine Setup (Complete Isolation)
 
