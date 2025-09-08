@@ -63,63 +63,74 @@ Access VS Code at: **http://localhost:8080**
 
 ## 🐧 WSL Setup (Recommended for Windows)
 
-Perfect balance of Linux performance with Windows integration.
+Follow these steps to set up the environment in any WSL (Windows Subsystem for Linux) distribution.
 
-### Prerequisites
+### Step 1: Open Your WSL Terminal
 
-- Windows 10 version 2004+ or Windows 11
-- Administrator privileges
-
-### Quick Start
-
+First, open your WSL terminal on Windows. If you don't have WSL installed, run this command in an **Administrator** PowerShell and follow the prompts:
 ```powershell
-# 1. Install WSL2 + Ubuntu (run as Administrator)
 wsl --install
-
-# 2. Restart computer when prompted
-
-# 3. Create Ubuntu user account (WSL will open automatically)
-# Follow the prompts to set username/password
 ```
 
-### Post-Installation Setup
+### Step 2: Clone the Repository
+
+Clone your repository from GitHub into your WSL home directory.
 
 ```bash
-# Inside WSL Ubuntu terminal
-curl -L https://raw.githubusercontent.com/RyanMostert/portable-dev-environment/main/VM-Setup/scripts/post-install-ubuntu.sh -o ~/post-install.sh
-chmod +x ~/post-install.sh
-./post-install.sh
+git clone https://github.com/RyanMostert/portable-dev-environment.git
 ```
 
-### What You Get
+### Step 3: Navigate to the Project Directory
 
-- **Ubuntu 22.04 LTS** running natively on Windows
-- **Docker** + Docker Compose with native performance
-- **VS Code** with Remote-WSL integration
-- **OpenCode AI** coding assistant
-- **Node.js, Python** development environments
-- **Full Windows file system access** via `/mnt/c/`
+Change into the newly created directory.
 
-### Daily Usage
+```bash
+cd portable-dev-environment
+```
+
+### Step 4: Configure Your Environment
+
+Create your personal environment configuration file by copying the example file.
+
+```bash
+cp .env.example .env
+```
+
+Now, edit the `.env` file with your favorite text editor (like `nano` or `vim`) and fill in the required values. **Important:** Use Linux-style paths (e.g., `/home/user/projects`).
+
+```bash
+nano .env
+```
+
+### Step 5: Run the Installer
+
+Execute the main installation script. It will automatically detect that you are on Linux and run the correct setup. The script will likely ask for your `sudo` password to install system-wide packages.
+
+```bash
+bash scripts/install/install.sh
+```
+
+### Step 6: Restart WSL
+
+After the installation is complete, you **must restart your WSL instance** for the Docker permissions to take effect. Close the WSL terminal and run the following command in Windows PowerShell or Command Prompt:
 
 ```powershell
-# Open WSL from anywhere
-wsl
-
-# Access WSL files from Windows Explorer
-\\wsl$\Ubuntu\home\yourusername
-
-# Use VS Code with WSL
-code .  # (inside WSL directory)
+wsl --shutdown
 ```
 
-### Advantages
+Then, simply reopen your WSL terminal.
 
-- ✅ **Native Linux performance**
-- ✅ **Windows integration** - access Windows files seamlessly
-- ✅ **VS Code Remote-WSL** works perfectly
-- ✅ **Docker runs natively** without VM overhead
-- ✅ **Lightweight** - no separate VM required
+### Step 7: Verify the Installation
+
+Once you've restarted WSL, navigate back to the project directory and run the health check script to ensure everything was installed correctly.
+
+```bash
+cd portable-dev-environment
+bash scripts/utils/health-check.sh
+```
+
+If all checks pass, your portable development environment is ready to use inside WSL!
+
 
 ## 💻 Windows Native Setup
 
