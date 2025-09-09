@@ -232,6 +232,8 @@ nvim myfile.py
 | Terminal | `<Space> + t + f` |
 | Command Palette | `<Space> + f + c` |
 
+📖 **Complete Guide**: See [docs/astronvim-setup.md](docs/astronvim-setup.md) for detailed configuration and advanced features.
+
 ## 📟 tmux - Terminal Session Management
 
 **tmux** is included for managing multiple terminal sessions, perfect for development workflows.
@@ -269,6 +271,8 @@ tmux list-sessions
 | Previous Window | `Ctrl-a + p` |
 | Reload Config | `Ctrl-a + r` |
 | Detach Session | `Ctrl-a + d` |
+
+📖 **Complete Guide**: See [docs/tmux-guide.md](docs/tmux-guide.md) for comprehensive tmux documentation and advanced features.
 
 ### Sample Development Workflow
 ```bash
