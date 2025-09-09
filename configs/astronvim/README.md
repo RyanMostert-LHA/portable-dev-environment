@@ -1,23 +1,34 @@
-# AstroNvim User Configuration Template
+# AstroNvim Template
 
-This directory contains user-specific configurations for AstroNvim that will be automatically applied during installation.
+**NOTE:** This is for AstroNvim v5+
 
-## Files
+A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
-- **init.lua** - Main user configuration file
-- **README.md** - This documentation
+## 🛠️ Installation
 
-## Customization
+#### Make a backup of your current nvim and shared folder
 
-After installation, you can further customize your AstroNvim setup by editing:
-- `~/.config/nvim/lua/user/init.lua`
+```shell
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
+```
 
-## Default Settings Applied
+#### Create a new user repository from this template
 
-- Relative line numbers enabled
-- 2-space indentation
-- Astrodark colorscheme
-- Enhanced Git integration
-- Additional helpful options
+Press the "Use this template" button above to create a new repository to store your user configuration.
 
-For more customization options, see the [AstroNvim documentation](https://docs.astronvim.com/).
+You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
+
+#### Clone the repository
+
+```shell
+git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
+```
+
+#### Start Neovim
+
+```shell
+nvim
+```

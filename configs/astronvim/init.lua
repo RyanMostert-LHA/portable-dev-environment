@@ -1,125 +1,27 @@
--- AstroNvim User Configuration
--- This file configures AstroNvim with sensible defaults for the portable dev environment
+-- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
+-- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-return {
-  -- Set colorscheme
-  colorscheme = "astrodark",
-  
-  -- Configure AstroNvim options
-  options = {
-    opt = {
-      -- Line numbers
-      relativenumber = true,    -- Show relative line numbers
-      number = true,            -- Show current line number
-      
-      -- Indentation
-      tabstop = 2,              -- Tab width
-      shiftwidth = 2,           -- Indent width
-      expandtab = true,         -- Use spaces instead of tabs
-      smartindent = true,       -- Smart indentation
-      
-      -- Text wrapping
-      wrap = false,             -- Disable line wrapping
-      linebreak = true,         -- Wrap at word boundaries
-      
-      -- Search
-      ignorecase = true,        -- Ignore case in search
-      smartcase = true,         -- Case sensitive if uppercase present
-      
-      -- Visual
-      cursorline = true,        -- Highlight current line
-      signcolumn = "yes",       -- Always show sign column
-      colorcolumn = "80",       -- Show column at 80 characters
-      
-      -- Behavior
-      clipboard = "unnamedplus", -- Use system clipboard
-      mouse = "a",              -- Enable mouse support
-      scrolloff = 8,            -- Keep 8 lines above/below cursor
-      sidescrolloff = 8,        -- Keep 8 columns left/right of cursor
-      
-      -- Performance
-      updatetime = 250,         -- Faster completion
-      timeoutlen = 300,         -- Faster key sequence completion
-    },
-  },
-  
-  -- Configure key mappings
-  mappings = {
-    n = {
-      -- Better window navigation
-      ["<C-h>"] = { "<C-w>h", desc = "Move to left window" },
-      ["<C-j>"] = { "<C-w>j", desc = "Move to bottom window" },
-      ["<C-k>"] = { "<C-w>k", desc = "Move to top window" },
-      ["<C-l>"] = { "<C-w>l", desc = "Move to right window" },
-      
-      -- Buffer navigation
-      ["<S-l>"] = { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" },
-      ["<S-h>"] = { function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer" },
-      
-      -- Quick save
-      ["<leader>w"] = { "<cmd>w<cr>", desc = "Save file" },
-      
-      -- Clear search highlighting
-      ["<leader>h"] = { "<cmd>nohlsearch<cr>", desc = "Clear search highlighting" },
-    },
-    
-    -- Terminal mode mappings
-    t = {
-      ["<C-h>"] = { "<cmd>wincmd h<cr>", desc = "Move to left window" },
-      ["<C-j>"] = { "<cmd>wincmd j<cr>", desc = "Move to bottom window" },
-      ["<C-k>"] = { "<cmd>wincmd k<cr>", desc = "Move to top window" },
-      ["<C-l>"] = { "<cmd>wincmd l<cr>", desc = "Move to right window" },
-    },
-  },
-  
-  -- Configure LSP settings
-  lsp = {
-    -- Configure language servers
-    config = {
-      -- Python
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "basic",
-              autoImportCompletions = true,
-            },
-          },
-        },
-      },
-      
-      -- JavaScript/TypeScript
-      tsserver = {
-        settings = {
-          typescript = {
-            preferences = {
-              disableSuggestions = false,
-            },
-          },
-        },
-      },
-    },
-    
-    -- Configure formatting
-    formatting = {
-      format_on_save = {
-        enabled = true,
-        allow_filetypes = {
-          "python",
-          "javascript",
-          "typescript",
-          "lua",
-          "json",
-          "yaml",
-          "markdown",
-        },
-      },
-    },
-  },
-  
-  -- Configure which plugins to disable if needed
-  plugins = {
-    -- Example: disable a plugin
-    -- ["plugin-name"] = false,
-  },
-}
+if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
+  -- stylua: ignore
+  local result = vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  if vim.v.shell_error ~= 0 then
+    -- stylua: ignore
+    vim.api.nvim_echo({ { ("Error cloning lazy.nvim:\n%s\n"):format(result), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+    vim.fn.getchar()
+    vim.cmd.quit()
+  end
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+-- validate that lazy is available
+if not pcall(require, "lazy") then
+  -- stylua: ignore
+  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
+
+require "lazy_setup"
+require "polish"
