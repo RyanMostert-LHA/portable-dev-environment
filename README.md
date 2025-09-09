@@ -167,6 +167,8 @@ cd E:\devEnv
 - **Node.js** (JavaScript runtime)
 - **Python 3.11** (programming language)
 - **VS Code Server** (web-based IDE)
+- **Neovim with AstroNvim** (advanced terminal-based editor)
+- **tmux** (terminal multiplexer for session management)
 
 ### Development Packages
 
@@ -189,6 +191,106 @@ cd E:\devEnv
 - ✅ **Web-based IDE**: Access from any browser
 - ✅ **AI-Ready**: OpenCode AI coding agent pre-installed
 - ✅ **Portable**: Bring your dev environment anywhere
+
+## 🚀 AstroNvim - Supercharged Neovim
+
+This environment includes **AstroNvim**, a feature-rich Neovim configuration that provides an IDE-like experience in the terminal.
+
+### Features
+- **LSP Support**: Language Server Protocol for intelligent code completion
+- **Syntax Highlighting**: Tree-sitter powered syntax highlighting
+- **File Explorer**: Built-in file manager with telescope integration
+- **Git Integration**: Seamless Git operations within the editor
+- **Plugin Management**: Lazy.nvim for fast plugin loading
+- **Customizable**: Easily extend with your own configurations
+
+### Quick Start with AstroNvim
+```bash
+# Open a file with Neovim
+nvim myfile.py
+
+# Open file explorer
+# Press <Space> + e
+
+# Search files
+# Press <Space> + f + f
+
+# Search text in files
+# Press <Space> + f + w
+
+# Git status
+# Press <Space> + g + s
+```
+
+### AstroNvim Key Bindings
+| Action | Keybinding |
+|--------|------------|
+| File Explorer | `<Space> + e` |
+| Find Files | `<Space> + f + f` |
+| Find Text | `<Space> + f + w` |
+| Git Status | `<Space> + g + s` |
+| Terminal | `<Space> + t + f` |
+| Command Palette | `<Space> + f + c` |
+
+## 📟 tmux - Terminal Session Management
+
+**tmux** is included for managing multiple terminal sessions, perfect for development workflows.
+
+### Features
+- **Session Persistence**: Keep your work sessions alive
+- **Multiple Panes**: Split your terminal into multiple sections
+- **Window Management**: Organize different projects in separate windows
+- **Mouse Support**: Click to select panes and resize
+- **Custom Configuration**: Pre-configured with developer-friendly settings
+
+### tmux Quick Start
+```bash
+# Start a new tmux session
+tmux
+
+# Start a named session
+tmux new-session -s mysession
+
+# Attach to an existing session
+tmux attach -t mysession
+
+# List all sessions
+tmux list-sessions
+```
+
+### tmux Key Bindings (Prefix: Ctrl-a)
+| Action | Keybinding |
+|--------|------------|
+| Split Horizontally | `Ctrl-a + \|` |
+| Split Vertically | `Ctrl-a + -` |
+| Switch Panes | `Alt + Arrow Keys` |
+| New Window | `Ctrl-a + c` |
+| Next Window | `Ctrl-a + n` |
+| Previous Window | `Ctrl-a + p` |
+| Reload Config | `Ctrl-a + r` |
+| Detach Session | `Ctrl-a + d` |
+
+### Sample Development Workflow
+```bash
+# 1. Start a tmux session for your project
+tmux new-session -s myproject
+
+# 2. Split into multiple panes
+# Ctrl-a + | (vertical split)
+# Ctrl-a + - (horizontal split)
+
+# 3. In different panes:
+# - Pane 1: Code editor (nvim)
+# - Pane 2: Server/build process
+# - Pane 3: Git operations
+# - Pane 4: File operations
+
+# 4. Detach when done (keeps everything running)
+# Ctrl-a + d
+
+# 5. Reattach later
+tmux attach -t myproject
+```
 
 ## 🤖 AI Coding Assistant Ready
  
@@ -294,6 +396,8 @@ Perfect for running Docker in a dedicated VM with full Ubuntu desktop environmen
 - **Docker** + Docker Compose pre-configured
 - **VS Code** + development extensions
 - **OpenCode AI** coding assistant
+- **AstroNvim** - Advanced Neovim configuration
+- **tmux** - Terminal session management
 - **Network access** via NAT configuration
 
 ### Requirements
@@ -461,7 +565,13 @@ docker exec -it container-name bash
 2. **Clone repo**: `git clone https://github.com/RyanMostert/portable-dev-environment.git`
 3. **Start environment**: `docker-compose up -d`
 4. **Open browser**: http://localhost:8080
-5. **Start coding** with VS Code + OpenCode AI!
+5. **Start by opening a terminal and typing**: `opencode --help`
+
+**Or try the new tools:**
+- `nvim` - Launch AstroNvim (advanced Neovim configuration)  
+- `tmux` - Start a terminal multiplexer session
+
+**Start coding** with VS Code + OpenCode AI!
 
 ## 🚀 Getting Started Guide
 
@@ -535,10 +645,16 @@ After setup, you'll have:
 
 - ✅ **VS Code** ready for development
 - ✅ **OpenCode AI** for AI-assisted coding
+- ✅ **AstroNvim** for advanced terminal-based editing
+- ✅ **tmux** for session management and terminal multiplexing
 - ✅ **Docker** for containerized development
 - ✅ **Git** configured and ready
 - ✅ **Node.js & Python** development environments
 
 **Start by opening a terminal and typing**: `opencode --help`
+
+**Or try the new tools:**
+- `nvim` - Launch AstroNvim (advanced Neovim configuration)
+- `tmux` - Start a terminal multiplexer session
 
 Happy coding! 🎯

@@ -10,7 +10,7 @@ install_essentials() {
     (sudo apt-get update && sudo apt-get install -y \
         curl wget git vim nano unzip htop build-essential \
         software-properties-common apt-transport-https ca-certificates \
-        gnupg lsb-release) &
+        gnupg lsb-release tmux) &
     show_progress $!
     wait $!
     if [ $? -ne 0 ]; then
@@ -59,6 +59,92 @@ install_python() {
     log_info "Python 3.11 installed successfully."
 }
 
+install_neovim() {
+    log_info "Installing Neovim..."
+    # Install Neovim from the stable PPA for latest version
+    sudo add-apt-repository ppa:neovim-ppa/stable -y
+    sudo apt-get update
+    sudo apt-get install -y neovim
+    if [ $? -ne 0 ]; then
+        log_error "Failed to install Neovim."
+        exit 1
+    fi
+    check_command nvim
+    log_info "Neovim installed successfully."
+}
+
+install_astronvim() {
+    log_info "Installing AstroNvim..."
+    # Backup existing Neovim configuration if it exists
+    if [ -d "$HOME/.config/nvim" ]; then
+        log_info "Backing up existing Neovim configuration..."
+        mv "$HOME/.config/nvim" "$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
+    fi
+    
+    # Clone AstroNvim configuration
+    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+    if [ $? -ne 0 ]; then
+        log_error "Failed to clone AstroNvim configuration."
+        exit 1
+    fi
+    
+    # Install additional dependencies for AstroNvim
+    sudo apt-get install -y ripgrep fd-find
+    
+    # Create symbolic link for fdfind (required by some AstroNvim plugins)
+    sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd
+    
+    log_info "AstroNvim installed successfully."
+    log_info "Run 'nvim' to complete the setup and install plugins."
+}
+
+configure_tmux() {
+    log_info "Configuring tmux..."
+    # Create a basic tmux configuration
+    cat > "$HOME/.tmux.conf" << 'EOF'
+# Set prefix to Ctrl-a
+set -g prefix C-a
+unbind C-b
+bind-key C-a send-prefix
+
+# Enable mouse mode
+set -g mouse on
+
+# Set default terminal mode to 256color mode
+set -g default-terminal "screen-256color"
+
+# Enable vi mode
+setw -g mode-keys vi
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Reload config file
+bind r source-file ~/.tmux.conf \; display "Config reloaded!"
+
+# Split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# Switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Status bar customization
+set -g status-bg black
+set -g status-fg white
+set -g status-left '#[fg=green]#S '
+set -g status-right '#[fg=yellow]%Y-%m-%d %H:%M'
+EOF
+    
+    log_info "tmux configuration created at ~/.tmux.conf"
+}
+
 # --- Main Function ---
 main() {
     log_info "Starting Ubuntu setup..."
@@ -68,6 +154,9 @@ main() {
     install_docker
     install_node
     install_python
+    install_neovim
+    install_astronvim
+    configure_tmux
 
     log_info "Installing global Node.js packages..."
     npm install -g --prefix /usr/local
@@ -76,6 +165,11 @@ main() {
     python3.11 -m pip install --user -r requirements.txt
 
     log_info "Ubuntu setup complete!"
+    log_info ""
+    log_info "Next steps:"
+    log_info "1. Log out and back in for Docker group changes to take effect"
+    log_info "2. Run 'nvim' to complete AstroNvim plugin installation"
+    log_info "3. Start tmux with 'tmux' command"
 }
 
 main
