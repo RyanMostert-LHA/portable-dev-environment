@@ -1,4 +1,4 @@
--- Terminal and UI enhancements
+-- Terminal and UI enhancements - FIXED VERSION
 return {
   -- Enhanced terminal with proper keybindings
   {
@@ -63,90 +63,28 @@ return {
     end,
   },
 
-  -- Show keypresses and mode indicator
+  -- Simple and reliable keypress display
   {
-    "NStefan002/screenkey.nvim", 
-    lazy = false,
-    version = "*", -- or branch = "dev", to use the latest commit
+    "tamton-aquib/keys.nvim",
+    event = "VeryLazy",
     config = function()
-      require("screenkey").setup({
-        win_opts = {
-          relative = "editor",
-          anchor = "NE",
-          width = 40,
-          height = 3,
-          col = vim.o.columns - 1,
-          row = 1,
-          border = "single",
-          title = " Keys ",
-          title_pos = "center",
-          style = "minimal",
-          focusable = false,
-          noautocmd = true,
-        },
-        compress_after = 3,
-        clear_after = 3,
-        disable = {
-          filetypes = {},
-          buftypes = {},
-        },
-        show_leader = true,
-        group_mappings = true,
-        display_infront = {},
-        display_behind = {},
-        filter = function(keys)
-          return keys
-        end,
-        keys = {
-          ["<TAB>"] = "󰌒",
-          ["<CR>"] = "⏎",
-          ["<ESC>"] = "Esc",
-          ["<SPACE>"] = "󱁐",
-          ["<BS>"] = "⌫",
-          ["<DEL>"] = "⌦",
-          ["<LEFT>"] = "",
-          ["<RIGHT>"] = "",
-          ["<UP>"] = "",
-          ["<DOWN>"] = "",
-          ["<HOME>"] = "Home",
-          ["<END>"] = "End",
-          ["<PAGEUP>"] = "PgUp",
-          ["<PAGEDOWN>"] = "PgDn",
-          ["<INSERT>"] = "Ins",
-          ["<F1>"] = "󱊫",
-          ["<F2>"] = "󱊬",
-          ["<F3>"] = "󱊭",
-          ["<F4>"] = "󱊮",
-          ["<F5>"] = "󱊯",
-          ["<F6>"] = "󱊰",
-          ["<F7>"] = "󱊱",
-          ["<F8>"] = "󱊲",
-          ["<F9>"] = "󱊳",
-          ["<F10>"] = "󱊴",
-          ["<F11>"] = "󱊵",
-          ["<F12>"] = "󱊶",
-        },
+      require("keys").setup({
+        enable_on_startup = true,
+        display_time = 3000,
+        display_char_count = 5,
+        hide_in_insert = false,
+        position = "top-right",
+        border = "rounded",
+        text_hl = "String",
+        bg_hl = "Normal",
+        border_hl = "FloatBorder",
+        width = 30,
+        height = 2,
       })
     end,
   },
 
-  -- Enhanced mode indicator in statusline
-  {
-    "AstroNvim/astroui",
-    opts = function(_, opts)
-      -- Ensure status table exists
-      if not opts.status then opts.status = {} end
-      if not opts.status.separators then opts.status.separators = {} end
-      
-      -- Add mode colors and indicators
-      opts.status.separators.left = { "", "" }
-      opts.status.separators.right = { "", "" }
-      
-      return opts
-    end,
-  },
-
-  -- Show current mode prominently
+  -- Mode display and UI enhancements
   {
     "AstroNvim/astrocore",
     opts = function(_, opts)
@@ -154,27 +92,58 @@ return {
       if not opts.mappings then opts.mappings = {} end
       if not opts.mappings.n then opts.mappings.n = {} end
       
+      -- Show current mode with detailed info
       opts.mappings.n["<Leader>uM"] = {
         function()
           local mode = vim.fn.mode()
           local mode_names = {
-            n = "NORMAL",
-            i = "INSERT", 
-            v = "VISUAL",
-            V = "V-LINE",
-            ["\22"] = "V-BLOCK",
-            c = "COMMAND",
-            s = "SELECT",
-            S = "S-LINE",
-            ["\19"] = "S-BLOCK",
-            R = "REPLACE",
-            r = "REPLACE",
-            Rv = "V-REPLACE",
-            t = "TERMINAL",
+            n = "🟢 NORMAL",
+            i = "🔵 INSERT", 
+            v = "🟠 VISUAL",
+            V = "🟡 V-LINE",
+            ["\22"] = "🟣 V-BLOCK",
+            c = "⚪ COMMAND",
+            s = "🔴 SELECT",
+            S = "🔴 S-LINE",
+            ["\19"] = "🔴 S-BLOCK",
+            R = "🔴 REPLACE",
+            r = "🔴 REPLACE",
+            Rv = "🔴 V-REPLACE",
+            t = "💻 TERMINAL",
           }
-          vim.notify("Current Mode: " .. (mode_names[mode] or mode:upper()), vim.log.levels.INFO)
+          local mode_display = mode_names[mode] or ("❓ " .. mode:upper())
+          vim.notify("Current Mode: " .. mode_display, vim.log.levels.INFO, { title = "Vim Mode" })
         end,
         desc = "Show current mode",
+      }
+
+      -- Toggle keypress display
+      opts.mappings.n["<Leader>uk"] = {
+        function()
+          local ok, keys = pcall(require, "keys")
+          if ok then
+            if keys.enabled then
+              keys.disable()
+              vim.notify("🚫 Keypress display disabled", vim.log.levels.INFO)
+            else
+              keys.enable()
+              vim.notify("👀 Keypress display enabled", vim.log.levels.INFO)
+            end
+          else
+            vim.notify("❌ Keys plugin not available", vim.log.levels.ERROR)
+          end
+        end,
+        desc = "Toggle keypress display",
+      }
+
+      -- Quick mode check
+      opts.mappings.n["<Leader>um"] = {
+        function()
+          local mode = vim.fn.mode()
+          local modes = { n = "NORMAL", i = "INSERT", v = "VISUAL", V = "V-LINE", c = "COMMAND", t = "TERMINAL" }
+          vim.api.nvim_echo({{ "Mode: " .. (modes[mode] or mode), "Title" }}, false, {})
+        end,
+        desc = "Quick mode check",
       }
       
       return opts
