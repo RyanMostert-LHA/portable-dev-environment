@@ -63,31 +63,84 @@ return {
     end,
   },
 
-  -- Simple and reliable keypress display
-  {
-    "tamton-aquib/keys.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("keys").setup({
-        enable_on_startup = true,
-        display_time = 3000,
-        display_char_count = 5,
-        hide_in_insert = false,
-        position = "top-right",
-        border = "rounded",
-        text_hl = "String",
-        bg_hl = "Normal",
-        border_hl = "FloatBorder",
-        width = 30,
-        height = 2,
-      })
-    end,
-  },
-
-  -- Mode display and UI enhancements
+  -- Custom keypress display using built-in Neovim features
   {
     "AstroNvim/astrocore",
     opts = function(_, opts)
+      -- Initialize keypress display state
+      vim.g.keypress_display_enabled = false
+      vim.g.keypress_win = nil
+      vim.g.keypress_buf = nil
+
+      -- Create keypress display functions
+      local function create_keypress_window()
+        if vim.g.keypress_buf and vim.api.nvim_buf_is_valid(vim.g.keypress_buf) then
+          vim.api.nvim_buf_delete(vim.g.keypress_buf, { force = true })
+        end
+
+        vim.g.keypress_buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_buf_set_option(vim.g.keypress_buf, 'bufhidden', 'wipe')
+        vim.api.nvim_buf_set_option(vim.g.keypress_buf, 'filetype', 'keypress')
+
+        local width = 30
+        local height = 2
+        vim.g.keypress_win = vim.api.nvim_open_win(vim.g.keypress_buf, false, {
+          relative = 'editor',
+          anchor = 'NE',
+          width = width,
+          height = height,
+          col = vim.o.columns,
+          row = 0,
+          style = 'minimal',
+          border = 'rounded',
+          title = ' Keys ',
+          title_pos = 'center',
+          focusable = false,
+          zindex = 100,
+        })
+
+        vim.api.nvim_win_set_option(vim.g.keypress_win, 'winhl', 'Normal:NormalFloat,FloatBorder:FloatBorder')
+      end
+
+      local function show_keypress(key)
+        if not vim.g.keypress_display_enabled then return end
+        
+        if not vim.g.keypress_win or not vim.api.nvim_win_is_valid(vim.g.keypress_win) then
+          create_keypress_window()
+        end
+
+        -- Format the key display
+        local display_key = key
+        if key == ' ' then display_key = '󱁐 SPACE' 
+        elseif key == '\r' or key == '\n' then display_key = '⏎ ENTER'
+        elseif key == '\27' then display_key = ' ESC'
+        elseif key == '\t' then display_key = '󰌒 TAB'
+        end
+
+        -- Update the window content
+        vim.api.nvim_buf_set_lines(vim.g.keypress_buf, 0, -1, false, {
+          ' Last Key: ' .. display_key,
+          ' Mode: ' .. string.upper(vim.fn.mode())
+        })
+
+        -- Auto-hide after 3 seconds
+        vim.defer_fn(function()
+          if vim.g.keypress_win and vim.api.nvim_win_is_valid(vim.g.keypress_win) then
+            vim.api.nvim_buf_set_lines(vim.g.keypress_buf, 0, -1, false, {
+              ' Waiting for keys...',
+              ' Mode: ' .. string.upper(vim.fn.mode())
+            })
+          end
+        end, 3000)
+      end
+
+      -- Set up keypress capture
+      vim.on_key(function(key, typed)
+        if typed and vim.g.keypress_display_enabled then
+          show_keypress(typed)
+        end
+      end)
+
       -- Add mode display keybinding
       if not opts.mappings then opts.mappings = {} end
       if not opts.mappings.n then opts.mappings.n = {} end
@@ -120,17 +173,16 @@ return {
       -- Toggle keypress display
       opts.mappings.n["<Leader>uk"] = {
         function()
-          local ok, keys = pcall(require, "keys")
-          if ok then
-            if keys.enabled then
-              keys.disable()
-              vim.notify("🚫 Keypress display disabled", vim.log.levels.INFO)
-            else
-              keys.enable()
-              vim.notify("👀 Keypress display enabled", vim.log.levels.INFO)
-            end
+          vim.g.keypress_display_enabled = not vim.g.keypress_display_enabled
+          
+          if vim.g.keypress_display_enabled then
+            create_keypress_window()
+            vim.notify("👀 Keypress display enabled", vim.log.levels.INFO)
           else
-            vim.notify("❌ Keys plugin not available", vim.log.levels.ERROR)
+            if vim.g.keypress_win and vim.api.nvim_win_is_valid(vim.g.keypress_win) then
+              vim.api.nvim_win_close(vim.g.keypress_win, true)
+            end
+            vim.notify("🚫 Keypress display disabled", vim.log.levels.INFO)
           end
         end,
         desc = "Toggle keypress display",
