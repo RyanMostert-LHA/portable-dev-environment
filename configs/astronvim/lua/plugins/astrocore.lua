@@ -86,6 +86,12 @@ return {
           expr = true,
         },
 
+        -- Terminal keybindings
+        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+        ["<Leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "Float terminal" },
+        ["<Leader>th"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal terminal" },
+        ["<Leader>tv"] = { "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "Vertical terminal" },
+
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
           function()
@@ -106,6 +112,15 @@ return {
       v = {
         -- Visual mode commenting
         ["<Leader>/"] = { "gc", desc = "Toggle comment", remap = true },
+      },
+      t = {
+        -- Terminal mode mappings
+        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+        ["<Esc><Esc>"] = { "<C-\\><C-n>", desc = "Exit terminal mode" },
+      },
+      i = {
+        -- Insert mode mappings
+        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
       },
     },
   },

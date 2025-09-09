@@ -13,6 +13,7 @@
 - [🐛 Debugging (DAP)](#-debugging-dap)
 - [🌿 Git Integration](#-git-integration)
 - [💻 Terminal & Toggleterm](#-terminal--toggleterm)
+- [🎮 UI & Visual Aids](#-ui--visual-aids)
 - [🪟 Window & Buffer Management](#-window--buffer-management)
 - [⚙️ Configuration & Help](#️-configuration--help)
 
@@ -296,17 +297,49 @@
 ### Terminal Controls
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>t` | Toggle terminal | Toggle floating terminal |
-| `<Leader>tf` | Float terminal | Floating terminal |
+| `Ctrl + \` | Toggle terminal | Quick toggle floating terminal |
+| `<Leader>t` | Toggle terminal | Alternative terminal toggle |
+| `<Leader>tf` | Float terminal | Floating terminal window |
 | `<Leader>th` | Horizontal terminal | Horizontal split terminal |
 | `<Leader>tv` | Vertical terminal | Vertical split terminal |
-| `<Ctrl>\\` | Toggle terminal | Quick toggle terminal |
 
 ### In Terminal Mode
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Ctrl>\\` | Exit terminal mode | Back to normal mode |
-| `<Esc><Esc>` | Exit terminal mode | Alternative exit |
+| `Esc` | Exit terminal mode | Back to normal mode |
+| `jk` | Exit terminal mode | Quick exit sequence |
+| `Ctrl + h/j/k/l` | Navigate windows | Move between terminal and editor |
+
+---
+
+## 🎮 UI & Visual Aids
+
+### Screenkey (Keypress Display)
+The screenkey plugin automatically shows your keypresses in the top-right corner of the screen. This helps you:
+- **Learn keybindings** by seeing what you're pressing
+- **Debug key sequences** when something doesn't work  
+- **Show others** what keys you're using during demos
+
+### Mode Indicator
+| Key | Action | Description |
+|-----|--------|-------------|
+| `<Leader>uM` | Show current mode | Display current Vim mode notification |
+
+### Visual Mode Indicators
+- **NORMAL** - Default navigation mode (green in statusline)
+- **INSERT** - Typing mode (blue in statusline) 
+- **VISUAL** - Text selection mode (orange in statusline)
+- **V-LINE** - Line selection mode (press `V`)
+- **V-BLOCK** - Block selection mode (press `Ctrl+v`)
+- **COMMAND** - Command mode (press `:`)
+- **TERMINAL** - Terminal mode (in toggleterm)
+| (automatic) | Mode indicator | Shows current mode in statusline |
+| (automatic) | Which-key popup | Shows available keybindings |
+
+### UI Features
+- **Mode Icons**: 🅽 Normal, 🅸 Insert, 🆅 Visual, 🅲 Command, 🆃 Terminal
+- **Keypress Display**: Shows keys in top-right corner
+- **Which-key Help**: Automatic popup showing available commands
 
 ---
 
