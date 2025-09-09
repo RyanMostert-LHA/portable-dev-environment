@@ -1,7 +1,7 @@
-# 🚀 AstroNvim Cheatsheet
+# 🚀 AstroNvim Cheatsheet - Alt Key Leader
 
 > **Your comprehensive guide to mastering AstroNvim**  
-> Press `<Leader>?` anytime to open this cheatsheet!
+> Press `Alt+?` anytime to open this cheatsheet!
 
 ## 📖 Table of Contents
 - [🎯 Essential Basics](#-essential-basics)
@@ -20,6 +20,13 @@
 ---
 
 ## 🎯 Essential Basics
+
+### 🔑 **NEW: Alt Leader Key**
+**Important Change**: Leader key is now **Alt** instead of Space!
+- **Alt + ?** = Open cheatsheet
+- **Alt + e** = File explorer  
+- **Alt + f + f** = Find files
+- **No more conflicts** with terminal tools!
 
 ### Modes
 | Key | Action | Description |
@@ -72,27 +79,27 @@
 ### AstroNvim File Operations
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>ff` | Find files | Telescope file finder |
-| `<Leader>fo` | Find old files | Recently opened files |
-| `<Leader>fw` | Find words | Live grep in project |
-| `<Leader>fc` | Find config | Find config files |
-| `<Leader>fh` | Find help | Search help tags |
-| `<Leader>fk` | Find keymaps | Search keybindings |
-| `<Leader>fm` | Find man pages | Search manual pages |
-| `<Leader>fr` | Find registers | Search vim registers |
-| `<Leader>ft` | Find themes | Browse colorschemes |
+| `Alt+f f` | Find files | Telescope file finder |
+| `Alt+f o` | Find old files | Recently opened files |
+| `Alt+f w` | Find words | Live grep in project |
+| `Alt+f c` | Find config | Find config files |
+| `Alt+f h` | Find help | Search help tags |
+| `Alt+f k` | Find keymaps | Search keybindings |
+| `Alt+f m` | Find man pages | Search manual pages |
+| `Alt+f r` | Find registers | Search vim registers |
+| `Alt+f t` | Find themes | Browse colorschemes |
 
 ### Buffer Management
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>c` | Close buffer | Close current buffer |
-| `<Leader>C` | Close all buffers | Close all but current |
-| `<Leader>bd` | Pick buffer to close | Interactive buffer close |
+| `Alt+c` | Close buffer | Close current buffer |
+| `Alt+C` | Close all buffers | Close all but current |
+| `Alt+b d` | Pick buffer to close | Interactive buffer close |
 | `]b` | Next buffer | Switch to next buffer |
 | `[b` | Previous buffer | Switch to previous buffer |
-| `<Leader>bb` | Browse buffers | Telescope buffer picker |
-| `<Leader>b\` | Close all left | Close buffers to the left |
-| `<Leader>b|` | Close all right | Close buffers to the right |
+| `Alt+b b` | Browse buffers | Telescope buffer picker |
+| `Alt+b \` | Close all left | Close buffers to the left |
+| `Alt+b |` | Close all right | Close buffers to the right |
 
 ### File Operations
 | Key | Action | Description |
@@ -103,7 +110,7 @@
 | `:qa` | Quit all | Close all windows |
 | `:wq` | Save and quit | Write and close |
 | `:q!` | Force quit | Quit without saving |
-| `<Leader>fn` | New file | Create new file |
+| `Alt+f n` | New file | Create new file |
 
 ---
 
@@ -160,10 +167,10 @@
 ### AstroNvim Search
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>fw` | Find words | Live grep in workspace |
-| `<Leader>fW` | Find words cursor | Search word under cursor |
-| `<Leader>fs` | Find symbols | Search LSP symbols |
-| `<Leader>fS` | Find symbols (all) | Search symbols in workspace |
+| `Alt+f w` | Find words | Live grep in workspace |
+| `Alt+f W` | Find words cursor | Search word under cursor |
+| `Alt+f s` | Find symbols | Search LSP symbols |
+| `Alt+f S` | Find symbols (all) | Search symbols in workspace |
 
 ### Replace
 | Command | Action | Description |
@@ -181,8 +188,8 @@
 ### Basic Navigation
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>e` | Toggle explorer | Open/close Neo-tree |
-| `<Leader>o` | Focus explorer | Focus on Neo-tree window |
+| `Alt+e` | Toggle explorer | Open/close Neo-tree |
+| `Alt+o` | Focus explorer | Focus on Neo-tree window |
 
 ### In Neo-tree Window
 | Key | Action | Description |
@@ -298,10 +305,10 @@
 | Key | Action | Description |
 |-----|--------|-------------|
 | `Ctrl + \` | Toggle terminal | Quick toggle floating terminal |
-| `<Leader>t` | Toggle terminal | Alternative terminal toggle |
-| `<Leader>tf` | Float terminal | Floating terminal window |
-| `<Leader>th` | Horizontal terminal | Horizontal split terminal |
-| `<Leader>tv` | Vertical terminal | Vertical split terminal |
+| `Alt+t` | Toggle terminal | Alternative terminal toggle |
+| `Alt+t f` | Float terminal | Floating terminal window |
+| `Alt+t h` | Horizontal terminal | Horizontal split terminal |
+| `Alt+t v` | Vertical terminal | Vertical split terminal |
 
 ### In Terminal Mode
 | Key | Action | Description |
@@ -323,7 +330,9 @@ The screenkey plugin automatically shows your keypresses in the top-right corner
 ### Mode Indicator
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>uM` | Show current mode | Display current Vim mode notification |
+| `Alt+u M` | Show current mode | Display current Vim mode notification |
+| `Alt+u k` | Toggle keypress display | Show/hide keypress display |
+| `Alt+u m` | Quick mode check | Quick mode display |
 
 ### Visual Mode Indicators
 - **NORMAL** - Default navigation mode (green in statusline)
@@ -381,11 +390,11 @@ The screenkey plugin automatically shows your keypresses in the top-right corner
 ### Help & Documentation
 | Key | Action | Description |
 |-----|--------|-------------|
-| `<Leader>?` | Cheatsheet | Open this cheatsheet! |
-| `<Leader>h` | Help | Clear search highlights |
+| `Alt+?` | Cheatsheet | Open this cheatsheet! |
+| `Alt+h ?` | Quick Start Guide | Open beginner guide |
 | `:h topic` | Help | Get help on topic |
-| `<Leader>fh` | Find help | Search help files |
-| `<Leader>fk` | Find keymaps | Search all keybindings |
+| `Alt+f h` | Find help | Search help files |
+| `Alt+f k` | Find keymaps | Search all keybindings |
 
 ### AstroNvim Specific
 | Key | Action | Description |
@@ -409,8 +418,8 @@ The screenkey plugin automatically shows your keypresses in the top-right corner
 ## 🎯 Pro Tips for Beginners
 
 ### Start with These 10 Commands
-1. `<Leader>e` - File explorer
-2. `<Leader>ff` - Find files  
+1. `Alt+e` - File explorer
+2. `Alt+f f` - Find files  
 3. `i` - Insert mode
 4. `Esc` - Normal mode
 5. `:w` - Save
@@ -422,16 +431,16 @@ The screenkey plugin automatically shows your keypresses in the top-right corner
 
 ### Essential Workflow
 1. **Open nvim**: `nvim` or `nvim filename`
-2. **Explore files**: `<Leader>e` (Neo-tree)
-3. **Find files**: `<Leader>ff` 
+2. **Explore files**: `Alt+e` (Neo-tree)
+3. **Find files**: `Alt+f f` 
 4. **Edit**: `i` to insert, `Esc` to normal mode
 5. **Save**: `:w`
 6. **Navigate**: `hjkl` or mouse
-7. **Find text**: `<Leader>fw`
+7. **Find text**: `Alt+f w`
 8. **Quit**: `:q`
 
-### Remember: Leader = Space
-Almost every custom command starts with `Space`. When you see `<Leader>`, press the spacebar!
+### Remember: Leader = Alt
+Almost every custom command starts with `Alt`. When you see `<Leader>`, press the Alt key!
 
 ---
 
@@ -446,4 +455,4 @@ Almost every custom command starts with `Space`. When you see `<Leader>`, press 
 **Happy Vimming! 🎉**
 
 ---
-*Press `<Leader>?` anytime to return to this cheatsheet*
+*Press `Alt+?` anytime to return to this cheatsheet*

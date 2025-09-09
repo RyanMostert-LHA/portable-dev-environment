@@ -61,24 +61,24 @@ return {
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
-        -- Cheatsheet keybinding
-        ["<Leader>?"] = { 
+        -- Cheatsheet keybinding (Alt + ?)
+        ["<M-?>"] = { 
           function() 
             vim.cmd("edit " .. vim.fn.stdpath("config") .. "/cheatsheet.md")
           end, 
           desc = "Open Cheatsheet" 
         },
 
-        -- Quick start guide for beginners
-        ["<Leader>h?"] = { 
+        -- Quick start guide for beginners (Alt + h + ?)
+        ["<M-h>?"] = { 
           function() 
             vim.cmd("edit " .. vim.fn.stdpath("config") .. "/quick-start.md")
           end, 
           desc = "Quick Start Guide" 
         },
 
-        -- Fix commenting keybindings
-        ["<Leader>/"] = {
+        -- Fix commenting keybindings (Alt + /)
+        ["<M-/>"] = {
           function()
             return vim.api.nvim_get_current_line():match("^%s*$") and "o" or "gcc"
           end,
@@ -86,14 +86,14 @@ return {
           expr = true,
         },
 
-        -- Terminal keybindings
+        -- Terminal keybindings (keep Ctrl+\ for compatibility)
         ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-        ["<Leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "Float terminal" },
-        ["<Leader>th"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal terminal" },
-        ["<Leader>tv"] = { "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "Vertical terminal" },
+        ["<M-t>f"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "Float terminal" },
+        ["<M-t>h"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal terminal" },
+        ["<M-t>v"] = { "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "Vertical terminal" },
 
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
+        -- mappings seen under group name "Buffer" (Alt + b + d)
+        ["<M-b>d"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
               function(bufnr) require("astrocore.buffer").close(bufnr) end
@@ -110,8 +110,8 @@ return {
         -- ["<C-S>"] = false,
       },
       v = {
-        -- Visual mode commenting
-        ["<Leader>/"] = { "gc", desc = "Toggle comment", remap = true },
+        -- Visual mode commenting (Alt + /)
+        ["<M-/>"] = { "gc", desc = "Toggle comment", remap = true },
       },
       t = {
         -- Terminal mode mappings

@@ -6,10 +6,10 @@ return {
     cmd = { "ToggleTerm", "TermExec" },
     keys = {
       { "<C-\\>", "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal", mode = { "n", "t" } },
-      { "<Leader>tf", "<Cmd>ToggleTerm direction=float<CR>", desc = "Float terminal" },
-      { "<Leader>th", "<Cmd>ToggleTerm direction=horizontal<CR>", desc = "Horizontal terminal" },
-      { "<Leader>tv", "<Cmd>ToggleTerm direction=vertical<CR>", desc = "Vertical terminal" },
-      { "<Leader>t", "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
+      { "<M-t>f", "<Cmd>ToggleTerm direction=float<CR>", desc = "Float terminal" },
+      { "<M-t>h", "<Cmd>ToggleTerm direction=horizontal<CR>", desc = "Horizontal terminal" },
+      { "<M-t>v", "<Cmd>ToggleTerm direction=vertical<CR>", desc = "Vertical terminal" },
+      { "<M-t>", "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
     },
     opts = {
       size = function(term)
@@ -145,8 +145,8 @@ return {
       if not opts.mappings then opts.mappings = {} end
       if not opts.mappings.n then opts.mappings.n = {} end
       
-      -- Show current mode with detailed info
-      opts.mappings.n["<Leader>uM"] = {
+      -- Show current mode with detailed info (Alt + u + M)
+      opts.mappings.n["<M-u>M"] = {
         function()
           local mode = vim.fn.mode()
           local mode_names = {
@@ -170,8 +170,8 @@ return {
         desc = "Show current mode",
       }
 
-      -- Toggle keypress display
-      opts.mappings.n["<Leader>uk"] = {
+      -- Toggle keypress display (Alt + u + k)
+      opts.mappings.n["<M-u>k"] = {
         function()
           vim.g.keypress_display_enabled = not vim.g.keypress_display_enabled
           
@@ -188,8 +188,8 @@ return {
         desc = "Toggle keypress display",
       }
 
-      -- Quick mode check
-      opts.mappings.n["<Leader>um"] = {
+      -- Quick mode check (Alt + u + m)
+      opts.mappings.n["<M-u>m"] = {
         function()
           local mode = vim.fn.mode()
           local modes = { n = "NORMAL", i = "INSERT", v = "VISUAL", V = "V-LINE", c = "COMMAND", t = "TERMINAL" }
