@@ -649,6 +649,37 @@ VM-Setup\scripts\quick-setup.bat
 # 5. Run post-install script inside Ubuntu VM
 ```
 
+## 🛠️ Terminal Programming & Navigation Tools
+
+### Quick Setup
+```bash
+# Install all terminal tools (run after main installation)
+./scripts/install-tools.sh      # Install tools
+./scripts/configure-tools.sh    # Configure tools
+source ~/.bashrc                # Apply changes
+```
+
+### What You Get
+- 📁 **File Navigation**: `ranger`, `nnn`, `mc`, `eza`, `tree`
+- 🔍 **Search & Text**: `ripgrep`, `fd-find`, `fzf`, `bat`, `jq`
+- 🚀 **Terminal**: `tmux`, `starship` prompt
+- 💻 **Development**: `git-delta`, `lazygit`, `htop`, `btop`, `ncdu`
+- 🎨 **Quality of Life**: `trash-cli`, `thefuck`
+- 🛠️ **Languages**: Rust, enhanced Node.js/Python tools
+
+### Quick Commands
+```bash
+ll                    # Enhanced ls with icons (eza)
+rg "pattern" .       # Ultra-fast search (ripgrep)
+lg                   # Beautiful git interface (lazygit)
+ranger               # Terminal file manager
+fzf                  # Fuzzy finder for everything
+btop                 # Modern system monitor
+```
+
+📖 **Full guide**: `docs/tools-guide.md`
+
+
 ## 🎉 What's Next?
 
 After setup, you'll have:
