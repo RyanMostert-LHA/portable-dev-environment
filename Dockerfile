@@ -96,45 +96,9 @@ WORKDIR /home/developer
 # Install AstroNvim
 RUN git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 
-# Create tmux configuration
-RUN echo '# Set prefix to Ctrl-a\n\
-set -g prefix C-a\n\
-unbind C-b\n\
-bind-key C-a send-prefix\n\
-\n\
-# Enable mouse mode\n\
-set -g mouse on\n\
-\n\
-# Set default terminal mode to 256color mode\n\
-set -g default-terminal "screen-256color"\n\
-\n\
-# Enable vi mode\n\
-setw -g mode-keys vi\n\
-\n\
-# Start windows and panes at 1, not 0\n\
-set -g base-index 1\n\
-setw -g pane-base-index 1\n\
-\n\
-# Reload config file\n\
-bind r source-file ~/.tmux.conf \\; display "Config reloaded!"\n\
-\n\
-# Split panes using | and -\n\
-bind | split-window -h\n\
-bind - split-window -v\n\
-unbind '"'"'"\n\
-unbind %\n\
-\n\
-# Switch panes using Alt-arrow without prefix\n\
-bind -n M-Left select-pane -L\n\
-bind -n M-Right select-pane -R\n\
-bind -n M-Up select-pane -U\n\
-bind -n M-Down select-pane -D\n\
-\n\
-# Status bar customization\n\
-set -g status-bg black\n\
-set -g status-fg white\n\
-set -g status-left '"'"'#[fg=green]#S '"'"'\n\
-set -g status-right '"'"'#[fg=yellow]%Y-%m-%d %H:%M'"'"'' > ~/.tmux.conf
+# Copy configuration files from repository
+COPY --chown=developer:developer configs/.tmux.conf /home/developer/.tmux.conf
+COPY --chown=developer:developer configs/astronvim/ /home/developer/.config/nvim/lua/user/
 
 # Create workspace directories
 RUN mkdir -p /home/developer/workspace/projects \

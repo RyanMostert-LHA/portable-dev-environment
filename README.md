@@ -170,6 +170,12 @@ cd E:\devEnv
 - **Neovim with AstroNvim** (advanced terminal-based editor)
 - **tmux** (terminal multiplexer for session management)
 
+### Pre-configured Settings
+
+- **tmux**: Custom configuration with easy controls, mouse support, and developer-friendly keybindings
+- **AstroNvim**: User configuration with sensible defaults, LSP settings, and enhanced workflows
+- **All configurations**: Automatically applied during installation from repository templates
+
 ### Development Packages
 
 - **Node.js**: TypeScript, ESLint, Prettier, Nodemon

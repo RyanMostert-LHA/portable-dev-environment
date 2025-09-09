@@ -94,14 +94,26 @@ install_astronvim() {
     # Create symbolic link for fdfind (required by some AstroNvim plugins)
     sudo ln -sf /usr/bin/fdfind /usr/local/bin/fd
     
+    # Copy user configuration from repository if available
+    if [ -d "configs/astronvim" ]; then
+        mkdir -p ~/.config/nvim/lua/user
+        cp -r configs/astronvim/* ~/.config/nvim/lua/user/
+        log_info "AstroNvim user configuration copied from repository"
+    fi
+    
     log_info "AstroNvim installed successfully."
     log_info "Run 'nvim' to complete the setup and install plugins."
 }
 
 configure_tmux() {
     log_info "Configuring tmux..."
-    # Create a basic tmux configuration
-    cat > "$HOME/.tmux.conf" << 'EOF'
+    # Copy tmux configuration from repository
+    if [ -f "configs/.tmux.conf" ]; then
+        cp configs/.tmux.conf "$HOME/.tmux.conf"
+        log_info "tmux configuration copied from repository"
+    else
+        # Fallback: create basic tmux configuration inline
+        cat > "$HOME/.tmux.conf" << 'EOF'
 # Set prefix to Ctrl-a
 set -g prefix C-a
 unbind C-b
@@ -141,8 +153,10 @@ set -g status-fg white
 set -g status-left '#[fg=green]#S '
 set -g status-right '#[fg=yellow]%Y-%m-%d %H:%M'
 EOF
+        log_info "Basic tmux configuration created"
+    fi
     
-    log_info "tmux configuration created at ~/.tmux.conf"
+    log_info "tmux configuration setup complete"
 }
 
 # --- Main Function ---
