@@ -61,6 +61,19 @@ return {
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
+        -- GitHub PR shortcuts
+        ["<leader>gp"] = { name = "GitHub PRs" },
+        ["<leader>gpl"] = { "<cmd>Octo pr list<cr>", desc = "List PRs" },
+        ["<leader>gpc"] = { "<cmd>Octo pr create<cr>", desc = "Create PR" },
+        ["<leader>gps"] = { "<cmd>Octo pr search<cr>", desc = "Search PRs" },
+        ["<leader>gpr"] = { "<cmd>Octo review start<cr>", desc = "Start review" },
+
+        -- GitHub Issues shortcuts  
+        ["<leader>gi"] = { name = "GitHub Issues" },
+        ["<leader>gil"] = { "<cmd>Octo issue list<cr>", desc = "List issues" },
+        ["<leader>gic"] = { "<cmd>Octo issue create<cr>", desc = "Create issue" },
+        ["<leader>gis"] = { "<cmd>Octo issue search<cr>", desc = "Search issues" },
+
         -- Cheatsheet keybinding (Alt + ?)
         ["<M-?>"] = { 
           function() 
