@@ -77,23 +77,8 @@ return {
           desc = "Quick Start Guide" 
         },
 
-        -- Fix commenting keybindings (Alt + /)
-        ["<M-/>"] = {
-          function()
-            return vim.api.nvim_get_current_line():match("^%s*$") and "o" or "gcc"
-          end,
-          desc = "Toggle comment line",
-          expr = true,
-        },
-
-        -- Terminal keybindings (keep Ctrl+\ for compatibility)
-        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-        ["<M-t>f"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "Float terminal" },
-        ["<M-t>h"] = { "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal terminal" },
-        ["<M-t>v"] = { "<cmd>ToggleTerm direction=vertical size=80<cr>", desc = "Vertical terminal" },
-
-        -- mappings seen under group name "Buffer" (Alt + b + d)
-        ["<M-b>d"] = {
+        -- mappings seen under group name "Buffer"
+        ["<Leader>bd"] = {
           function()
             require("astroui.status.heirline").buffer_picker(
               function(bufnr) require("astrocore.buffer").close(bufnr) end
@@ -108,19 +93,6 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
-      },
-      v = {
-        -- Visual mode commenting (Alt + /)
-        ["<M-/>"] = { "gc", desc = "Toggle comment", remap = true },
-      },
-      t = {
-        -- Terminal mode mappings
-        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
-        ["<Esc><Esc>"] = { "<C-\\><C-n>", desc = "Exit terminal mode" },
-      },
-      i = {
-        -- Insert mode mappings
-        ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
       },
     },
   },

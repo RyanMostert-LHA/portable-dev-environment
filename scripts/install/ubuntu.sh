@@ -279,12 +279,15 @@ install_astronvim() {
         rm -rf "$HOME/.config/nvim"
     fi
     
-    # Clone AstroNvim configuration
-    log_info "Cloning AstroNvim configuration..."
-    if ! git clone --depth 1 https://github.com/AstroNvim/AstroNvim "$HOME/.config/nvim"; then
-        log_error "Failed to clone AstroNvim configuration"
+    # Clone AstroNvim template (not the main repository)
+    log_info "Cloning AstroNvim template..."
+    if ! git clone --depth 1 https://github.com/AstroNvim/template "$HOME/.config/nvim"; then
+        log_error "Failed to clone AstroNvim template"
         return 1
     fi
+    
+    # Remove git metadata from template
+    rm -rf "$HOME/.config/nvim/.git"
     
     # Install additional dependencies for AstroNvim
     log_info "Installing AstroNvim dependencies..."
@@ -306,9 +309,17 @@ install_astronvim() {
     local config_path="configs/astronvim"
     if [[ -d "$config_path" ]]; then
         log_info "Copying AstroNvim user configuration from repository..."
-        mkdir -p "$HOME/.config/nvim/lua/user"
-        if cp -r "$config_path"/* "$HOME/.config/nvim/lua/user/"; then
-            log_success "AstroNvim user configuration copied from repository"
+        
+        # Copy configuration files to the template structure
+        if cp -r "$config_path"/lua/* "$HOME/.config/nvim/lua/"; then
+            log_success "AstroNvim user configuration merged with template"
+            
+            # Also copy any top-level files
+            for file in "$config_path"/*.{lua,md,json} 2>/dev/null; do
+                if [[ -f "$file" ]]; then
+                    cp "$file" "$HOME/.config/nvim/"
+                fi
+            done
         else
             log_warn "Failed to copy user configuration, using defaults"
         fi
