@@ -1,0 +1,73 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "autoupdate": true,
+  "mcp": {
+    "filesystem": {
+      "type": "local",
+      "command": ["npx", "@modelcontextprotocol/server-filesystem", "${FILESYSTEM_ROOT_DIR}"],
+      "enabled": true,
+      "description": "Provides access to the local filesystem for reading, writing, and modifying files"
+    },
+    "git": {
+      "type": "local", 
+      "command": ["${PYTHON_VENV_PATH}/bin/python", "-m", "mcp_server_git", "--repository", "${GIT_REPOSITORY_DIR}"],
+      "enabled": true,
+      "description": "Enables interaction with Git repositories for committing, pushing, and managing branches"
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["${PYTHON_VENV_PATH}/bin/python", "-m", "mcp_server_fetch"],
+      "enabled": true,
+      "description": "Allows the agent to access and retrieve information from the web"
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "context7-mcp-server"],
+      "enabled": true,
+      "description": "Provides up-to-date documentation for various libraries and frameworks"
+    },
+    "any-chat-completions": {
+      "type": "local",
+      "command": ["npx", "${MCP_SERVERS_DIR}/node_modules/.bin/any-chat-completions-mcp"],
+      "enabled": true,
+      "description": "Provides access to various AI chat completion models",
+      "env": {
+        "AI_CHAT_BASE_URL": "${HUGGINGFACE_BASE_URL}",
+        "AI_CHAT_KEY": "${HUGGINGFACE_API_KEY}",
+        "AI_CHAT_MODEL": "${HUGGINGFACE_MODEL}",
+        "AI_CHAT_API_KEY": "${HUGGINGFACE_API_KEY}"
+      }
+    },
+    "browser": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/browser"],
+      "enabled": true,
+      "description": "Provides web browsing capabilities for research and data gathering"
+    },
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/gh"],
+      "enabled": true,
+      "description": "Interacts with the GitHub CLI to manage repositories, issues, and pull requests"
+    },
+    "testing": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/testing"],
+      "enabled": true,
+      "description": "Automatically runs your project's test suite to ensure code quality"
+    },
+    "linter": {
+      "type": "local",
+      "command": ["npx", "-y", "@mcp/linter"],
+      "enabled": true,
+      "description": "Formats code and checks for linting errors to maintain a consistent style"
+    },
+    "docker": {
+      "type": "local",
+      "command": ["npx", "-y", "@quantgeekdev/docker-mcp"],
+      "enabled": true,
+      "description": "Manages your Docker environment, including building images and running containers"
+    }
+  }
+}

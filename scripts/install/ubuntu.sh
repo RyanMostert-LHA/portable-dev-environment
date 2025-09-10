@@ -486,46 +486,12 @@ post_installation_summary() {
         echo "  2. Run 'nvim' to complete AstroNvim plugin installation"
         echo "  3. Start tmux with 'tmux' command"
         echo "  4. Run terminal enhancements script: ./scripts/install-tools.sh"
+        echo "  5. Run configuration script: ./scripts/configure-tools.sh"
+        echo "  6. Set up automatic repository management: ./scripts/setup-auto-repo-management.sh"
     else
         echo "  1. Run 'nvim' to complete AstroNvim plugin installation"
         echo "  2. Start tmux with 'tmux' command"  
         echo "  3. Run terminal enhancements script: ./scripts/install-tools.sh"
+        echo "  4. Run configuration script: ./scripts/configure-tools.sh"
+        echo "  5. Set up automatic repository management: ./scripts/setup-auto-repo-management.sh"
     fi
-    echo "  5. Run configuration script: ./scripts/configure-tools.sh"
-    echo ""
-}
-
-# --- Main Function ---
-main() {
-    echo "🚀 Portable Development Environment - Ubuntu Setup"
-    echo "================================================="
-    echo ""
-    
-    # Pre-installation checks
-    pre_install_checks
-    
-    # Prompt for Docker installation
-    prompt_docker_installation
-    
-    # Core installations
-    log_info "Starting core component installation..."
-    
-    install_essentials || { log_error "Essential packages installation failed"; exit 1; }
-    install_docker || { log_error "Docker installation failed"; exit 1; }
-    install_node || { log_error "Node.js installation failed"; exit 1; }
-    install_python || { log_error "Python installation failed"; exit 1; }
-    install_neovim || { log_error "Neovim installation failed"; exit 1; }
-    install_astronvim || { log_error "AstroNvim installation failed"; exit 1; }
-    configure_tmux || { log_error "tmux configuration failed"; exit 1; }
-    
-    # Install additional packages
-    install_packages
-    
-    # Show completion summary
-    post_installation_summary
-}
-
-# Run main function if script is executed directly
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    main "$@"
-fi
